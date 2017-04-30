@@ -1,5 +1,4 @@
 const Generator = require("yeoman-generator"),
-      npm       = require("npm"),
       Bb        = require("bluebird");
 
 module.exports = class extends Generator {
@@ -28,7 +27,7 @@ module.exports = class extends Generator {
         );
     }
 
-    install() {
+    conflicts() {
         this.fs.extendJSON(this.destinationPath("package.json"), {
             scripts: {
                 build: "eval $(dependencyEnv) && nopam && bsb 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
@@ -36,20 +35,11 @@ module.exports = class extends Generator {
                 clean: "bsb -clean-world"
             }
         });
+    }
 
-        return new Bb((resolve, reject) => {
-            npm.load({ "save-dev": true }, (error) => {
-                if(error)
-                    return reject(error);
-
-                let packages = [ "bs-platform", "dependency-env", "nopam", "ocamlBetterErrors" ];
-                npm.commands.install(packages, (error, data) => {
-                    if (error)
-                        return reject(error);
-
-                    resolve();
-                });
-            });
-        });
+    install() {
+        // let packages = [ "bs-platform", "dependency-env", "nopam", "ocamlBetterErrors" ];
+        let packages = [ "qs" ];
+        this.npmInstall(packages, { "save-dev": true });
     }
 };
