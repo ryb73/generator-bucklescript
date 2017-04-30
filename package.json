@@ -23,12 +23,12 @@
     "generators"
   ],
   "dependencies": {
-    "bluebird": "^3.5.0",
-    "generator-npm-init": "^1.3.2",
-    "npm": "^4.5.0",
-    "yeoman-generator": "^1.1.1"
+    "bluebird": "3.5.0",
+    "generator-npm-init": "1.3.2",
+    "npm": "4.5.0",
+    "yeoman-generator": "1.1.1"
   },
   "devDependencies": {
-    "eslint": "^3.19.0"
+    "eslint": "3.19.0"
   }
 }
