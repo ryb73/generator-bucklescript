@@ -38,8 +38,7 @@ module.exports = class extends Generator {
     }
 
     install() {
-        // let packages = [ "bs-platform", "dependency-env", "nopam", "ocamlBetterErrors" ];
-        let packages = [ "qs" ];
+        let packages = [ "bs-platform", "dependency-env", "nopam", "ocamlBetterErrors" ];
         this.npmInstall(packages, { "save-dev": true });
     }
 };
