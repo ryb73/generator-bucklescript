@@ -1,5 +1,4 @@
-const Generator = require("yeoman-generator"),
-      Bb        = require("bluebird");
+const Generator = require("yeoman-generator");
 
 module.exports = class extends Generator {
     initializing() {
@@ -31,6 +30,7 @@ module.exports = class extends Generator {
         this.fs.extendJSON(this.destinationPath("package.json"), {
             scripts: {
                 build: "eval $(dependencyEnv) && nopam && bsb 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
+                "build-no-be": "bsb 2>&1",
                 watch: "eval $(dependencyEnv) && nopam && bsb -make-world -w 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
                 clean: "bsb -clean-world"
             }
