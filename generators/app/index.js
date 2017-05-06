@@ -29,9 +29,9 @@ module.exports = class extends Generator {
     conflicts() {
         this.fs.extendJSON(this.destinationPath("package.json"), {
             scripts: {
-                build: "eval $(dependencyEnv) && nopam && bsb 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
+                build: "npm run clean && eval $(dependencyEnv) && nopam && bsb 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
                 "build-no-be": "bsb 2>&1",
-                watch: "eval $(dependencyEnv) && nopam && bsb -make-world -w 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
+                watch: "npm run clean && eval $(dependencyEnv) && nopam && bsb -make-world -w 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
                 clean: "bsb -clean-world"
             }
         });
