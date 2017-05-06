@@ -30,7 +30,7 @@ module.exports = class extends Generator {
         this.fs.extendJSON(this.destinationPath("package.json"), {
             scripts: {
                 build: "npm run clean && eval $(dependencyEnv) && nopam && bsb 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
-                "build-no-be": "bsb 2>&1",
+                "build-no-be": "bsb",
                 watch: "npm run clean && eval $(dependencyEnv) && nopam && bsb -make-world -w 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
                 clean: "bsb -clean-world"
             }
