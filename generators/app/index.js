@@ -29,16 +29,15 @@ module.exports = class extends Generator {
     conflicts() {
         this.fs.extendJSON(this.destinationPath("package.json"), {
             scripts: {
-                build: "npm run clean && eval $(dependencyEnv) && nopam && bsb 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
-                "build-no-be": "bsb",
-                watch: "npm run clean && eval $(dependencyEnv) && nopam && bsb -make-world -w 2>&1 | berror.native --path-to-refmttype $(which refmttype)",
+                build: "npm run clean && bsb -make-world",
+                watch: "npm run clean && bsb -make-world -w",
                 clean: "bsb -clean-world"
             }
         });
     }
 
     install() {
-        let packages = [ "bs-platform", "dependency-env", "nopam", "ocamlBetterErrors" ];
-        this.npmInstall(packages, { "save-dev": true });
+        let packages = [ "bs-platform" ];
+        this.yarnInstall(packages, { "save-dev": true });
     }
 };
