@@ -1,4 +1,5 @@
-const Generator = require("yeoman-generator");
+const Generator = require("yeoman-generator"),
+      mkdirp    = require("mkdirp");
 
 module.exports = class extends Generator {
     initializing() {
@@ -14,16 +15,14 @@ module.exports = class extends Generator {
             this.destinationPath(".gitignore")
         );
 
-        this.fs.copy(
-            this.templatePath("npmrc"),
-            this.destinationPath(".npmrc")
-        );
-
         this.fs.copyTpl(
             this.templatePath("bsconfig.json"),
             this.destinationPath("bsconfig.json"),
             { appName: this.determineAppname().replace(/ /g, "-") }
         );
+
+        mkdirp.sync(this.destinationPath("src/"));
+        mkdirp.sync(this.destinationPath("test/"));
     }
 
     conflicts() {
@@ -31,13 +30,11 @@ module.exports = class extends Generator {
             scripts: {
                 build: "npm run clean && bsb -make-world",
                 watch: "npm run clean && bsb -make-world -w",
-                clean: "bsb -clean-world"
+                clean: "rm -rf lib && bsb -clean-world"
+            },
+            peerDependencies: {
+                "bs-platform": "^2.0.0"
             }
         });
-    }
-
-    install() {
-        let packages = [ "bs-platform" ];
-        this.yarnInstall(packages, { "save-dev": true });
     }
 };
