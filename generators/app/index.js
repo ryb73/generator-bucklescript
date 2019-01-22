@@ -30,10 +30,11 @@ module.exports = class extends Generator {
             scripts: {
                 build: "npm run clean && bsb -make-world",
                 watch: "npm run clean && bsb -make-world -w",
-                clean: "rm -rf lib && bsb -clean-world"
+                clean: "rm -rf lib && bsb -clean-world",
+                postinstall: "[ ! -f package-links.json ] || ppl link-file",
             },
             peerDependencies: {
-                "bs-platform": "^2.0.0"
+                "bs-platform": "^4.0.0"
             }
         });
     }

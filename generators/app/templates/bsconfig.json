@@ -1,7 +1,7 @@
 {
-    "name" : "<%= appName %>",
-    "sources" : [
-        { "dir" : "src" },
+    "name": "<%= appName %>",
+    "sources": [
+        { "dir": "src" },
         {
             "dir": "test",
             "type": "dev"
